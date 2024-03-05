@@ -54,7 +54,7 @@ function App() {
   };
   return (
     <div>
-      <h2>products</h2>
+      <h2>Products</h2>
       <ul>
         {data.map((product) => (
           <li key={product.id}>
