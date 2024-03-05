@@ -1,68 +1,82 @@
 import React, { useEffect, useState } from "react";
-// i am using this url as the endpoint from the backend 'https://api.example.com/items'
+// i am using this url as the endpoint from the backend 'https://api.example.com/products'
 
 function App() {
   const [data, setData] = useState([]);
-  const [newItem, setNewItem] = useState("");
+  const [newproduct, setNewproduct] = useState("");
   useEffect(() => {
     fetchData();
   });
   const fetchData = async () => {
     try {
-      const response = axios.get("https://api.example.com/items");
+      const response = await axios.get("https://api.example.com/products");
       setData(response);
     } catch (err) {
       console.error(err);
     }
   };
-  const addItem = async () => {
+  const addproduct = async () => {
     try {
-      const response = axios.post("https://api.example.com/items", {
-        name: newItem,
+      const response = await axios.post("https://api.example.com/products", {
+        name: newproduct,
       });
       setData([...data, response.data]);
-      setNewItem("");
+      setNewproduct("");
     } catch (err) {
       console.error(err);
     }
   };
-  const updateItem = (id) => {
+  const updateproduct = async (id) => {
     try {
-      const response = axios.put(`https://api.example.com/items/${id}`, {
-        name: newItem,
-      });
+      const response = await axios.put(
+        `https://api.example.com/products/${id}`,
+        {
+          name: newproduct,
+        }
+      );
       const updateData = data.map((product) =>
-        product.id == id ? { ...product, name: newItem } : product
+        product.id == id ? { ...product, name: newproduct } : product
       );
       setData(updateData);
     } catch (err) {
       console.error(err);
     }
   };
+  const deleteproduct = async (id) => {
+    try {
+      await axios.delete(`https://api.example.com/products/${id}`);
+      const deletedData = data.filter((product) => product.id !== id);
+      setData(deletedData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div>
-      <h2>Items</h2>
+      <h2>products</h2>
       <ul>
-        {data.map((item) => (
-          <li key={item.id}>
-            {item.name}
+        {data.map((product) => (
+          <li key={product.id}>
+            {product.name}
             <button
-              onClick={() => updateItem(item.id, `${item.name} (Updated)`)}
+              onClick={() =>
+                updateproduct(product.id, `${product.name} (Updated)`)
+              }
             >
               Update
             </button>
-            <button onClick={() => deleteItem(item.id)}>Delete</button>
+            <button onClick={() => deleteproduct(product.id)}>Delete</button>
           </li>
         ))}
       </ul>
       <div>
         <input
           type="text"
-          value={newItem}
-          onChange={(e) => setNewItem(e.target.value)}
-          placeholder="Enter new item name"
+          value={newproduct}
+          onChange={(e) => setNewproduct(e.target.value)}
+          placeholder="Enter new product name"
         />
-        <button onClick={addItem}>Add Item</button>
+        <button onClick={addproduct}>Add product</button>
       </div>{" "}
     </div>
   );
