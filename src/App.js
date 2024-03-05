@@ -6,11 +6,11 @@ function App() {
   const [newproduct, setNewproduct] = useState("");
   useEffect(() => {
     fetchData();
-  });
+  }, []);
   const fetchData = async () => {
     try {
       const response = await axios.get("https://api.example.com/products");
-      setData(response);
+      setData(response.data);
     } catch (err) {
       console.error(err);
     }
