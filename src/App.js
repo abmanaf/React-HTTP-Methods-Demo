@@ -18,6 +18,8 @@ function App() {
   const addItem = async () => {
     try {
       const response = axios.post("https://api.example.com/items", newItem);
+      setData([...data, response.data]);
+      setNewItem("");
     } catch (err) {
       console.error(err);
     }
