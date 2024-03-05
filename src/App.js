@@ -17,7 +17,9 @@ function App() {
   };
   const addItem = async () => {
     try {
-      const response = axios.post("https://api.example.com/items", newItem);
+      const response = axios.post("https://api.example.com/items", {
+        name: newItem,
+      });
       setData([...data, response.data]);
       setNewItem("");
     } catch (err) {
