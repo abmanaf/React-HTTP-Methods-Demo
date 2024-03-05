@@ -54,31 +54,39 @@ function App() {
   };
   return (
     <div>
-      <h2>Products</h2>
-      <ul>
-        {data.map((product) => (
-          <li key={product.id}>
-            {product.name}
-            <button
-              onClick={() =>
-                updateproduct(product.id, `${product.name} (Updated)`)
-              }
-            >
-              Update
-            </button>
-            <button onClick={() => deleteproduct(product.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <input
-          type="text"
-          value={newproduct}
-          onChange={(e) => setNewproduct(e.target.value)}
-          placeholder="Enter new product name"
-        />
-        <button onClick={addproduct}>Add product</button>
-      </div>{" "}
+      <h2 style={{ textAlign: "center" }}>Products</h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ul>
+          {data.map((product) => (
+            <li key={product.id}>
+              {product.name}
+              <button
+                onClick={() =>
+                  updateproduct(product.id, `${product.name} (Updated)`)
+                }
+              >
+                Update
+              </button>
+              <button onClick={() => deleteproduct(product.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+        <div>
+          <input
+            type="text"
+            value={newproduct}
+            onChange={(e) => setNewproduct(e.target.value)}
+            placeholder="Enter new product name"
+          />
+          <button onClick={addproduct}>Add product</button>
+        </div>{" "}
+      </div>
     </div>
   );
 }
