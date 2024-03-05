@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 // i am using this url as the endpoint from the backend 'https://api.example.com/products'
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
       console.error(err);
     }
   };
-  const updateproduct = async (id) => {
+  const updateproduct = async (id, newproduct) => {
     try {
       const response = await axios.put(
         `https://api.example.com/products/${id}`,
@@ -35,7 +36,7 @@ function App() {
         }
       );
       const updateData = data.map((product) =>
-        product.id == id ? { ...product, name: newproduct } : product
+        product.id === id ? { ...product, name: newproduct } : product
       );
       setData(updateData);
     } catch (err) {
