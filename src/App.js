@@ -26,6 +26,19 @@ function App() {
       console.error(err);
     }
   };
+  const updateItem = (id) => {
+    try {
+      const response = axios.put(`https://api.example.com/items/${id}`, {
+        name: newItem,
+      });
+      const updateData = data.map((product) =>
+        product.id == id ? { ...product, name: newItem } : product
+      );
+      setData(updateData);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <div>
       <h2>Items</h2>
