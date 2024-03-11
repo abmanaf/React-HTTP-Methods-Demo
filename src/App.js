@@ -83,6 +83,7 @@ function App() {
             value={newproduct}
             onChange={(e) => setNewproduct(e.target.value)}
             placeholder="Enter new product name"
+            required
           />
           <button onClick={addproduct}>Add product</button>
         </div>{" "}
